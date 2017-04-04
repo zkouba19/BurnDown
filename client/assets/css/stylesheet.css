@@ -1,0 +1,22 @@
+.navbar {
+	margin-bottom: 0px;
+}
+#projectContainer {
+	background-color: blue;
+	height: 100%;
+	width: 100%;
+}
+
+#partialsView {
+	height: 1000px;
+	width: 100%;
+}
+
+#actionsSideBar {
+	height: 100%;
+	background-color: grey;
+}
+
+#actionsSideBar button {
+	display: block;
+}

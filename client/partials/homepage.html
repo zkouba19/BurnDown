@@ -1,0 +1,33 @@
+<div id="actionsSideBar" class="col-sm-2">
+	<button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#newProjectModal">New Project</button>
+	<button class="btn btn-success btn-md">Update Profile</button>
+	<button ng-click="logout()" class="btn btn-success btn-md">SignOut</button>
+</div>
+<div id="myProjects" class="col-md-5">
+	<h3>My Projects</h3>
+	<div class="project col-md-4" ng-repeat="project in projects">
+		<button ng-click="goToProject(project._id)"><span ng-bind="project.name"></span></button>
+	</div>
+</div>
+<div id="collaborations" class="col-md-5">
+	<h3>Collboration project</h3>
+	<div class="project col-md-4" ng-repeat="collabs in collaborations">
+		<h3></h3>
+	</div>
+</div>
+<div id="newProjectModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<h2 class="modal-title">Register</h2>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form ng-submit="newProject()" method="post" ng-model="newProjectInfo">
+					<input type="text" name="projectName" placeholder="Project Name" ng-model="newProjectInfo.name">
+					<input type="submit" name="submit" value="Create Project">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
