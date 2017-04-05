@@ -39,11 +39,12 @@ module.exports = {
 
 	// everything under this line has not been modified for this app //////////
 	getCurrentProject: function(req, res){
-		Project.findOne({projectID: req.session.currentProjectID}).populate('tasks').exec(function(err, project){
+		console.log('this is getcurrent projects session', req.session.currentProjectID)
+		Project.findOne({_id: req.session.currentProjectID}).populate('tasks').exec(function(err, project){
 			if(err){
 				console.log(err);
 			} else {
-				console.log('found the project');
+				console.log('found the project', project);
 				res.json({project: project})
 			}
 		})
@@ -60,7 +61,8 @@ module.exports = {
 			if(err){
 				console.log(err);
 			} else {
-				console.log('found the project');
+				req.session.currentProjectID = project._id
+				console.log('found the project and st ID', req.session.currentProjectID);
 				res.json({project: project})
 			}
 		})
@@ -71,13 +73,13 @@ module.exports = {
 
 	createTask: function(req, res){
 		var data = req.body
-		var newTask = new Task({name: data.name, description: data.description, dueDate: data.dueDate, status: data.status})
+		var newTask = new Task({name: data.name, description: data.description, status: 0})
 		newTask.save(function(err){
 			if(err){
 				console.log(err)
 			} else {
 				console.log("able to successfully create a task");
-				Project.findOne({_id: req.params.id}, function(err, project){
+				Project.findOne({_id: req.params.projectID}, function(err, project){
 					project.tasks.push(newTask._id);
 					project.save(function(err){
 						if(err){
@@ -98,6 +100,27 @@ module.exports = {
 			} else {
 				console.log('found task')
 				res.json({task: task})
+			}
+		})
+	}, 
+	editTask: function(req, res){
+		var data = req.body
+		console.log("########### this is req.body", data)
+		Task.findOne({_id: req.params.taskID}, function(err, task){
+			if(err){
+				console.log(err)
+			} else {
+				console.log('found task')
+				task.name = data.name;
+				task.description = data.description;
+				task.status = data.status
+				task.save(function(err){
+					if(err){
+						console.log(err)
+					} else {
+						res.json({task: task})
+					}
+				})
 			}
 		})
 	}

@@ -19,12 +19,19 @@ module.exports = function(app){
 
 	function ensureCorrectUser(req, res, next){
 		if(req.params.userID !== req.session.userID){
-			return
+			return;
 		} else {
 			next();
 		}
 	}
 
+	function ensureCorrectProject(req, res, next){
+		if(req.params.projectID !== req.session.currentProjectID){
+			return;
+		} else {
+			next();
+		}
+	}
 //////////////////////////////////////////////////////////////////
 	app.use(session({
 		secret: "secretKey"
@@ -66,9 +73,19 @@ module.exports = function(app){
 	 })
 
 	 app.get('/currentProject', loginRequired, function(req, res){
+	 	console.log('making it to currentproject route.')
 	 	ProjectController.getCurrentProject(req, res)
 	 })
 
+	 app.post('/projects/:projectID/task', loginRequired, ensureCorrectProject, function(req, res){
+	 	console.log('made it to create task route')
+	 	ProjectController.createTask(req, res);
+	 })
+
+	 app.post('/projects/:projectID/task/:taskID', loginRequired, ensureCorrectProject, function(req, res){
+	 	console.log('made it to create task route')
+	 	ProjectController.editTask(req, res);
+	 })
 
 
 

@@ -5,6 +5,7 @@ app.factory('mainFactory', ['$http', function($http){
 	factory.users = [];
 	factory.project = {};
 	factory.projects = [];
+	factory.editTask = {};
 	console.log('kept it going')
 	factory.registerUser = function(formData, callback){
 		console.log('made it to factory.register')
@@ -26,13 +27,27 @@ app.factory('mainFactory', ['$http', function($http){
 		})
 	};
 
+	factory.logout = function(callback){
+		console.log('ran logout in factory')
+		$http.get('/logout').then(function(returned_data){
+			console.log('made it to callback in factory')
+			factory.user = {};
+			factory.users = [];
+			factory.project = {};
+			factory.projects = [];
+			if(typeof(callback) == "function"){
+				callback();
+			}
+		})
+	}
+
 	factory.getLoggedInUserAndProjects = function(callback){
 		$http.get('/user').then(function(returned_data){
 			console.log('this is the user from persistence', returned_data.data.user)
 			factory.user = returned_data.data.user
 		});
 		$http.get('/projects').then(function(returned_data){
-			console.log('this is the project from persistence', returned_data.data.projects)
+			console.log('this is the projects from persistence', returned_data.data.projects)
 			factory.projects = returned_data.data.projects
 			if(typeof(callback) == 'function'){
 				callback({user: factory.user, projects: factory.projects})
@@ -41,7 +56,13 @@ app.factory('mainFactory', ['$http', function($http){
 	};
 
 	factory.getCurrentProject = function(callback){
-		$http.get('/currentProject')
+		$http.get('/currentProject').then(function(returned_data){
+			console.log('this is the project from persistence', returned_data.data)
+			factory.project = returned_data.data.project
+			if(typeof(callback) == 'function'){
+				callback(returned_data.data)
+			}
+		})
 	}
 
 	factory.newProject = function(projectInfo, callback){
@@ -63,21 +84,25 @@ app.factory('mainFactory', ['$http', function($http){
 			}
 		})
 	}
-	factory.logout = function(callback){
-		console.log('ran logout in factory')
-		$http.get('/logout').then(function(returned_data){
-			console.log('made it to callback in factory')
-			factory.user = {};
-			factory.users = [];
-			factory.project = {};
-			factory.projects = [];
+
+	factory.createTask = function(taskInfo, projectID){
+		console.log('ran create task function in factory')
+		$http.post('/projects/'+projectID+'/task', taskInfo).then(function(returned_data){
+			factory.project = returned_data.data.project
 			if(typeof(callback) == "function"){
-				callback();
+				callback(returned_data.data)
 			}
 		})
 	}
-
-
+	factory.editTask = function(projectID, taskInfo, callback){
+		console.log('made it to edit task in factory')
+		$http.post('/projects/'+projectID+'/task/'+taskInfo._id, taskInfo).then(function(returned_data){
+			factory.editTask = returned_data.data.task;
+			if(typeof(callback) == "function"){
+				callback(returned_data.data)
+			}
+		})
+	};
 	return factory
 }])
 

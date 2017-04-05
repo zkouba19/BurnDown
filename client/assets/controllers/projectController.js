@@ -3,6 +3,7 @@ app.controller('projectController', ['$scope', '$location', '$cookies', 'mainFac
 	$scope.project = mainFactory.project;
 	$scope.users = mainFactory.users;
 	$scope.user = mainFactory.user;
+	$scope.editTaskInfo = {};
 	console.log($location)
 
 	function getData(){
@@ -16,15 +17,17 @@ app.controller('projectController', ['$scope', '$location', '$cookies', 'mainFac
 				console.log(data)
 				console.log('******************')
 				console.log($scope.user)
-			});
-		}
-		if($cookies.get('CurrentProject')){
-			mainFactory.getCurrentProject(function(data){
-				$scope.project = data.project
-				console.log('*********currentProject*********')
-				console.log(data)
-				console.log('******************')
+				if($cookies.get('CurrentProject')){
+					console.log('made it to current porject cookie if statement')
+					mainFactory.getCurrentProject(function(data){
+					console.log('this is the data coming back ', data)
+					$scope.project = data.project
+					console.log('*********currentProject*********')
+					console.log($scope.project)
+					console.log('******************')
 			})
+		}
+			});
 		}
 	}
 	getData();
@@ -37,6 +40,16 @@ app.controller('projectController', ['$scope', '$location', '$cookies', 'mainFac
 		}
 	}
 	isLoggedIn();
+
+	$scope.logout = function(){
+		console.log('ran logout in controller')
+		$cookies.remove('CurrentProject')
+		$cookies.remove('userLoggedIn')
+		mainFactory.logout(function(){
+			console.log('made it to callback in controller')
+			$location.url('/');
+		})
+	}
 
 	$scope.newProject = function(){
 		mainFactory.newProject($scope.newProjectInfo,  function(data){
@@ -51,16 +64,33 @@ app.controller('projectController', ['$scope', '$location', '$cookies', 'mainFac
 		mainFactory.goToProject(projectID, function(data){
 			$scope.project = data.project
 			$cookies.put('CurrentProject', true);
+			console.log('we just got the poject', $scope.project);
 			$location.url('/projects/'+data.project._id);
 		})
 	}
-	$scope.logout = function(){
-		console.log('ran logout in controller')
-		$cookies.remove('CurrentProject')
-		$cookies.remove('userLoggedIn')
-		mainFactory.logout(function(){
-			console.log('made it to callback in controller')
-			$location.url('/');
+
+	$scope.createTask = function(projectID){
+		console.log('ran create task function in conroller');
+		mainFactory.createTask($scope.newTaskInfo, projectID, function(data){
+			console.log('made it back from the server')
+			getData();
+		})
+	}
+
+	$scope.getTask = function(taskID){
+		console.log('made it to get task func')
+		for(var i = 0; i < $scope.project.tasks.length; i++){
+			if(taskID === $scope.project.tasks[i]._id){
+				$scope.editTaskInfo = $scope.project.tasks[i]
+				console.log($scope.editTaskInfo)
+			}
+		}
+	}
+
+	$scope.editTask = function(){
+		mainFactory.editTask($scope.project.id, $scope.editTaskInfo, function(data){
+			console.log('************** project after task edit **********', data.task)
+			$scope.editTaskInfo = data.task;
 		})
 	}
 

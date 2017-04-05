@@ -1,45 +1,105 @@
 <h1><span ng-bind="project.name"></span></h1>
 <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#newTaskModal">New Task</button>
 <div class="row">
-	<div class="col-md-2">
-		<h2>Backlog</h2>
-		<div ng-repeat="task in project.tasks" ng-if="task.status == 'backlog'"></div>
+	<div class="col-md-2 swimlane">
+		<h3>Backlog</h3>
+		<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 0" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+			<h4 ng-bind="task.name"></h4>
+			<p ng-bind="task.description"></p>
+		</div>
 	</div>
-	<div class="col-md-2">
-		<h2>Sprint</h2>
-		<div ng-repeat="task in project.tasks" ng-if="task.status == 'Sprint'"></div>
+	<div class="col-md-2 swimlane">
+		<h3>Sprint</h3>
+		<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 1" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+			<h4 ng-bind="task.name"></h4>
+			<p ng-bind="task.description"></p>
+		</div>
 	</div>
-	<div class="col-md-2">
-		<h2>In Progress</h2>
-		<div ng-repeat="task in project.tasks" ng-if="task.status == 'inProgress'"></div>
+	<div class="col-md-2 swimlane">
+		<h3>In Progress</h3>
+		<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 2" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+			<h4 ng-bind="task.name"></h4>
+			<p ng-bind="task.description"></p>
+		</div>
 	</div>
-	<div class="col-md-2">
-		<h2>QA Ready</h2>
-		<div ng-repeat="task in project.tasks" ng-if="task.status == 'QA'"></div>
+	<div class="col-md-2 swimlane">
+		<h3>QA Ready</h3>
+		<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 3" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+			<h4 ng-bind="task.name"></h4>
+			<p ng-bind="task.description"></p>
+		</div>
 	</div>
-	<div class="col-md-2">
-		<h2>Ready to Deploy</h2>
-		<div ng-repeat="task in project.tasks" ng-if="task.status == 'readyToDeploy'"></div>
+	<div class="col-md-2 swimlane">
+		<h3>Ready to Deploy</h3>
+		<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 4" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+			<h4 ng-bind="task.name"></h4>
+			<p ng-bind="task.description"></p>
+		</div>
 	</div>
-	<div class="col-md-2">
-		<h2>Deployed</h2>
-		<div ng-repeat="task in project.tasks" ng-if="task.status == 'Deployed'"></div>
+	<div class="col-md-2 swimlane">
+		<h3>Deployed</h3>
+		<div ng-repeat="task in project.tasks" ng-if="task.status == 5" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+			<h4 ng-bind="task.name"></h4>
+			<p ng-bind="task.description"></p>
+		</div>
 	</div>
 </div>
+<!-- /////////////////// end of project board ///////////////////-->
 <div id="newTaskModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header text-center">
-				<h2 class="modal-title">Register</h2>
+				<h3 class="modal-title">New Task</h3>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form ng-submit="newTask()" method="post" ng-model="newTaskInfo">
-					<input type="text" name="taskName" placeholder="Task Name" ng-model="newTaskInfo.name">
-					<input type="text" name="taskDesc" placeholder="Task Description" ng-model="newTaskInfo.description">
-					<input type="submit" name="submit" value="Create Project">
+				<form ng-submit="createTask(project._id)" method="post" ng-model="newTaskInfo">
+					<div class="form-group">
+						<input class="form-control" type="text" name="taskName" placeholder="Task Name" ng-model="newTaskInfo.name">
+					</div>
+					<div class="form-group">
+						<textarea class="form-control" type="text" name="taskDesc" placeholder="Task Description" ng-model="newTaskInfo.description"></textarea>
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="submit" name="submit" value="Create Task">
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+<!-- ///////////////// end of create task modal /////////////////-->
+<div id="editTaskModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<h3 class="modal-title">Edit Task</h3>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form ng-submit="editTask(project._id)" method="post" ng-model="editTaskInfo">
+					<div class="form-group">
+						<input class="form-control" type="text" name="name" ng-model="editTaskInfo.name">
+					</div>
+					<div class="form-group">
+						<textarea class="form-control" type="text" name="name" ng-model="editTaskInfo.description"></textarea>
+					</div>
+					<div class="form-group">
+						<select class="form-control" name="status" value="ng-model='editTaskInfo.status'" ng-model="editTaskInfo.status" >
+							<option value="0">Backlog</option>
+							<option value="1">Sprint</option>
+							<option value="2">In Progress</option>
+							<option value="3">QA Ready</option>
+							<option value="4">Ready to Deploy</option>
+							<option value="5">Deployed</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="submit" name="submit" value="Submit">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /////////////////// end of edit task modal /////////////////-->
