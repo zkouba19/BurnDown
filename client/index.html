@@ -18,6 +18,15 @@
   <script src="assets/controllers/projectController.js"></script>
   <script src="assets/factories/mainFactory.js"></script>
   <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
+  <script type="text/javascript">
+  function closeModal(){
+    console.log('ran the close modal function');
+      $('#loginModal').modal('toggle');
+      $('#registerModal').modal('hide');
+      $('#editTaskModal').modal('hide')
+      $('#newTaskModal').modal('hide`')
+  }
+  </script>
 </head>
 <body>
 <nav class="navbar navbar-inverse">

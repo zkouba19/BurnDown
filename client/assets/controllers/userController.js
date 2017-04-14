@@ -1,4 +1,4 @@
-app.controller('userController', ['$scope', '$location', '$cookies', 'mainFactory', function($scope, $location, $cookies, mainFactory){
+app.controller('userController', ['$scope', '$route','$location', '$cookies', 'mainFactory', function($scope, $route, $location, $cookies, mainFactory){
 	// all $scope Variables //
 	$scope.user = {};
 	$scope.users = [];
@@ -35,6 +35,7 @@ app.controller('userController', ['$scope', '$location', '$cookies', 'mainFactor
 				$scope.user = data.user
 				$cookies.put('userLoggedIn', true);
 				$location.url('/homepage')
+				$route.reload();
 			} else {
 				$scope.messages = data.messages
 			}
@@ -46,11 +47,13 @@ app.controller('userController', ['$scope', '$location', '$cookies', 'mainFactor
 			if(data.messages){
 				$scope.messages = data.messages
 				$location.url('/');
+				$route.reload();
 			} else {
 				$scope.user = data.user;
 				$cookies.put('userLoggedIn', true);
 				console.log($cookies.get('userLoggedIn'))
 				$location.url('/homepage');
+				$route.reload();
 			}
 		})
 	}

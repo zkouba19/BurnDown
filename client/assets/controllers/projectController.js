@@ -1,4 +1,4 @@
-app.controller('projectController', ['$scope', '$location', '$cookies', 'mainFactory', function($scope, $location, $cookies, mainFactory){
+app.controller('projectController', ['$scope', '$route', '$location', '$cookies', 'mainFactory', function($scope, $route, $location, $cookies, mainFactory){
 	$scope.projects = mainFactory.projects;
 	$scope.project = mainFactory.project;
 	$scope.users = mainFactory.users;
@@ -73,7 +73,8 @@ app.controller('projectController', ['$scope', '$location', '$cookies', 'mainFac
 		console.log('ran create task function in conroller');
 		mainFactory.createTask($scope.newTaskInfo, projectID, function(data){
 			console.log('made it back from the server')
-			getData();
+			$scope.newTaskInfo = {};
+			$location.url('/projects/'+$scope.project._id);
 		})
 	}
 
@@ -88,9 +89,10 @@ app.controller('projectController', ['$scope', '$location', '$cookies', 'mainFac
 	}
 
 	$scope.editTask = function(){
-		mainFactory.editTask($scope.project.id, $scope.editTaskInfo, function(data){
+		mainFactory.editTask($scope.project._id, $scope.editTaskInfo, function(data){
 			console.log('************** project after task edit **********', data.task)
 			$scope.editTaskInfo = data.task;
+			
 		})
 	}
 

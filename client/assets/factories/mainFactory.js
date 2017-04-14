@@ -97,6 +97,7 @@ app.factory('mainFactory', ['$http', function($http){
 	factory.editTask = function(projectID, taskInfo, callback){
 		console.log('made it to edit task in factory')
 		$http.post('/projects/'+projectID+'/task/'+taskInfo._id, taskInfo).then(function(returned_data){
+			
 			factory.editTask = returned_data.data.task;
 			if(typeof(callback) == "function"){
 				callback(returned_data.data)
