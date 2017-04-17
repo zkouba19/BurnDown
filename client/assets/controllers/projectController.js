@@ -4,7 +4,9 @@ app.controller('projectController', ['$scope', '$route', '$location', '$cookies'
 	$scope.users = mainFactory.users;
 	$scope.user = mainFactory.user;
 	$scope.editTaskInfo = {};
-	console.log($location)
+	$scope.isLoggedOn = $cookies.get('userLoggedIn');
+	console.log("checkbox", $scope.isLoggedOn)
+
 
 	function getData(){
 		console.log('running get data', $cookies.get('userLoggedIn'));
@@ -45,10 +47,12 @@ app.controller('projectController', ['$scope', '$route', '$location', '$cookies'
 		console.log('ran logout in controller')
 		$cookies.remove('CurrentProject')
 		$cookies.remove('userLoggedIn')
+		$scope.isLoggedOn = false;
 		mainFactory.logout(function(){
 			console.log('made it to callback in controller')
 			$location.url('/');
 		})
+
 	}
 
 	$scope.newProject = function(){

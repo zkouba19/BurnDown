@@ -3,6 +3,9 @@ app.controller('userController', ['$scope', '$route','$location', '$cookies', 'm
 	$scope.user = {};
 	$scope.users = [];
 	$scope.messages = [];
+	$scope.isLoggedOn = $cookies.get('userLoggedIn');
+
+	console.log("checkbox", $scope.isLoggedOn)
 	// end of $scope variables //
 	// controller functions //
 	////// session validations //////

@@ -1,20 +1,26 @@
 <div id="actionsSideBar" class="col-sm-2">
-	<button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#newProjectModal">New Project</button>
-	<button class="btn btn-success btn-md">Update Profile</button>
-	<button ng-click="logout()" class="btn btn-success btn-md">SignOut</button>
-</div>
-<div id="myProjects" class="col-md-5">
-	<h3>My Projects</h3>
-	<div class="project col-md-4" ng-repeat="project in projects">
-		<button ng-click="goToProject(project._id)"><span ng-bind="project.name"></span></button>
+	<div class="form-group">
+	<button type="button" class="btn btn-primary btn-md form-control" data-toggle="modal" data-target="#newProjectModal">New Project</button>
+	</div>
+	<div class="form-group">
+	<button class="btn btn-primary btn-md form-control">Update Profile</button>
+	</div>
+	<div class="form-group">
+	<button ng-click="logout()" class="btn btn-primary btn-md form-control">SignOut</button>
 	</div>
 </div>
-<div id="collaborations" class="col-md-5">
+<h3>My Projects</h3>
+<div id="myProjects" class="container-fluid">
+	<div class="project col-sm-4" ng-repeat="project in projects" ng-click="goToProject(project._id)">
+		<h3 ng-bind="project.name"></h3>
+	</div>
+</div>
+<!-- <div id="collaborations" class="col-md-5">
 	<h3>Collboration project</h3>
 	<div class="project col-md-4" ng-repeat="collabs in collaborations">
 		<h3></h3>
 	</div>
-</div>
+</div> -->
 <div id="newProjectModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -25,7 +31,7 @@
 			<div class="modal-body">
 				<form ng-submit="newProject()" method="post" ng-model="newProjectInfo">
 					<input type="text" name="projectName" placeholder="Project Name" ng-model="newProjectInfo.name">
-					<input data-dismiss="modal" type="submit" name="submit" value="Create Project">
+					<input type="submit" name="submit" value="Create Project" ng-hide="newProjectModal">
 				</form>
 			</div>
 		</div>

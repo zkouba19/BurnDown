@@ -1,5 +1,17 @@
+body {
+	background: linear-gradient(to bottom left, #bfbfbf 40%, #666666 100%);
+	height: 1175px;
+}
+
 .navbar {
 	margin-bottom: 0px;
+	background-color: #2f79b9;
+	color: white;
+	border-bottom: 0px solid white;
+}
+
+.navbar a {
+	color: white;
 }
 #projectContainer {
 	background-color: blue;
@@ -14,22 +26,87 @@
 
 #actionsSideBar {
 	height: 100%;
-	background-color: grey;
+	
 }
 
 #actionsSideBar button {
 	display: block;
+	word-wrap: break-word;
 }
 
 .swimlane {
-	height: 100%;
+	height: 975px;
+	overflow: scroll;
 	text-align: center;
+	border-radius: 10px;
+	border-right: solid white 5px;
+	border-top: solid white 1px;
+	border-bottom: solid white 1px;
+	background: linear-gradient(to right, #a7a7a7 30%, #ffffff 144%);
+	color: white;
+}
+
+.swimHeader {
+	border-bottom: solid 5px white;
+	margin-bottom: 20px;
 }
 
 .tasks {
-	height: 20%;
-	width: 80%;
-	margin-left: 10%;
-	border: 2px solid black;
+	height: 140px;
+	/*width: 140px;*/
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-bottom: 10px;
+	border: 2px solid white;
+	border-radius: 10px;
+	background-color: #2f79b9;
+	color: white;
 	text-align: center;
 }
+
+.tasks h4 {
+	margin-top: 25%;
+}
+
+#loginRegBackground {
+	background-color: white;
+	background-image: url("./../images/logoBD.png");
+	margin-bottom: 0;
+	min-height: 50%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 300px;
+}
+
+
+.project {
+	width: 200px;
+	height: 200px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	border: 2px solid white;
+	background: linear-gradient(to top, #ffffff -7%, #2f79b9 85%);
+	color: white;
+}
+
+#mainContentInfo {
+	background: linear-gradient(to top, #ffffff -7%, #2f79b9 85%);
+	color: white;
+}
+
+/*#header { 
+	display: inline; 
+}*/
+
+#headerTitle {
+	color: #2f79b9;
+	
+	vertical-align: top;
+}
+#headerBTN{
+	margin-top: 20px;
+	padding-right: 10px;
+}
+
+
