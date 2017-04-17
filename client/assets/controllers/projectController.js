@@ -95,7 +95,7 @@ app.controller('projectController', ['$scope', '$route', '$location', '$cookies'
 	$scope.editTask = function(){
 		mainFactory.editTask($scope.project._id, $scope.editTaskInfo, function(data){
 			console.log('************** project after task edit **********', data.task)
-			$scope.editTaskInfo = data.task;
+			$scope.editTaskInfo = {};
 			
 		})
 	}

@@ -57,7 +57,7 @@
 		<div class="swimHeader">
 			<h3>Deployed</h3>
 		</div>
-		<div ng-repeat="task in project.tasks" ng-if="task.status == 5" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+		<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 5" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
 			<h4 ng-bind="task.name"></h4>
 			
 		</div>
@@ -72,7 +72,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form ng-submit="createTask(project._id)" method="post" ng-model="newTaskInfo">
+				<form ng-submit="createTask(project._id)" method="post" ng-model="newTaskInfo" onsubmit="closeModal('#newTaskModal')">
 					<div class="form-group">
 						<input class="form-control" type="text" name="taskName" placeholder="Task Name" ng-model="newTaskInfo.name">
 					</div>
@@ -96,7 +96,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
-				<form ng-submit="editTask(project._id)" method="post" ng-model="editTaskInfo">
+				<form ng-submit="editTask(project._id)" method="post" ng-model="editTaskInfo" onsubmit="closeModal('#editTaskModal')">
 					<div class="form-group">
 						<input class="form-control" type="text" name="name" ng-model="editTaskInfo.name">
 					</div>
@@ -104,7 +104,7 @@
 						<textarea class="form-control" type="text" name="name" ng-model="editTaskInfo.description"></textarea>
 					</div>
 					<div class="form-group">
-						<select class="form-control" name="status" value="ng-model='editTaskInfo.status'" ng-model="editTaskInfo.status" >
+						<select class="form-control" name="status" value="ng-model='editTaskInfo.status'" ng-model="editTaskInfo.status">
 							<option value="0">Backlog</option>
 							<option value="1">Sprint</option>
 							<option value="2">In Progress</option>

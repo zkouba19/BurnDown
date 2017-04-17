@@ -19,12 +19,9 @@
   <script src="assets/factories/mainFactory.js"></script>
   <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
   <script type="text/javascript">
-  function closeModal(){
+  function closeModal(name){
     console.log('ran the close modal function');
-      $('#loginModal').modal('toggle');
-      $('#registerModal').modal('hide');
-      $('#editTaskModal').modal('hide')
-      $('#newTaskModal').modal('hide`')
+    $(name).modal('toggle')
   }
   </script>
 </head>
@@ -36,15 +33,12 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="#!/homepage">Boards</a></li>
-      <li><a href="#">Friends</a></li>
+      <!-- <li><a href="#">Friends</a></li> -->
     </ul>
   </div>
 </nav>
 <div id="partialsView" ng-view="">
 	
 </div>
-
-
-
 </body>
 </html>
