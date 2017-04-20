@@ -9,8 +9,9 @@
 	<button ng-click="logout()" class="btn btn-primary btn-md form-control">SignOut</button>
 	</div>
 </div>
-<h3>My Projects</h3>
-<div id="myProjects" class="container-fluid">
+
+<div id="myProjects" class="col-sm-10 container-fluid">
+	<h3>My Projects</h3>
 	<div class="project col-sm-4" ng-repeat="project in projects" ng-click="goToProject(project._id)">
 		<h3 ng-bind="project.name"></h3>
 	</div>
@@ -21,3 +22,4 @@
 		<h3></h3>
 	</div>
 </div> -->
+

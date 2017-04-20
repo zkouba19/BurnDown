@@ -1,65 +1,74 @@
-<div id="header" class="row">
-	<div  class="col-sm-2" id="headerBTN">
-		<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#newTaskModal">New Task</button>
-	</div>
-	<div  class="col-sm-10" id="headerTitle">
-		<h1><span ng-bind="project.name"></span></h1>
-	</div>
-</div>
-<div class="row">
-	<div class="col-sm-2 swimlane">
-		<div class="swimHeader">
-			<h3>Backlog</h3>
-		</div>
-		<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 0" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
-			<h4 ng-bind="task.name"></h4>
-			
-		</div>
-	</div>
-	<div class="col-sm-2 swimlane">
-		<div class="swimHeader">
-			<h3>Sprint</h3>
-		</div>
-		<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 1" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
-			<h4 ng-bind="task.name"></h4>
-			
-		</div>
-	</div>
-	<div class="col-sm-2 swimlane">
-		<div class="swimHeader">
-			<h3>In Progress</h3>
-		</div>
 
-		<div class="tasks row" ng-repeat="task in project.tasks" ng-if="task.status == 2" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
-			<h4 ng-bind="task.name"></h4>
-			
+
+
+<nav class="navbar" id="projectNavBar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand active" href="" ng-bind="project.name"></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a data-toggle="modal" data-target="#newTaskModal">New Task</a></li>
+      <li><a data-toggle="modal" data-target="#newTaskModal">Add Collaborators</a></li>
+      <li><a data-toggle="modal" data-target="#newTaskModal">Reports (coming soon!)</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid">
+	<div class="row" id="projectBoard">
+		<div class="col-sm-2 swimlane">
+			<div class="swimHeader">
+				<h3>Backlog</h3>
+			</div>
+			<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 0" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+				<h4 ng-bind="task.name"></h4>
+				
+			</div>
 		</div>
-	</div>
-	<div class="col-sm-2 swimlane">
-		<div class="swimHeader">
-			<h3>QA Ready</h3>
+		<div class="col-sm-2 swimlane">
+			<div class="swimHeader">
+				<h3>Sprint</h3>
+			</div>
+			<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 1" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+				<h4 ng-bind="task.name"></h4>
+				
+			</div>
 		</div>
-		<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 3" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
-			<h4 ng-bind="task.name"></h4>
-			
+		<div class="col-sm-2 swimlane">
+			<div class="swimHeader">
+				<h3>In Progress</h3>
+			</div>
+
+			<div class="tasks row" ng-repeat="task in project.tasks" ng-if="task.status == 2" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+				<h4 ng-bind="task.name"></h4>
+				
+			</div>
 		</div>
-	</div>
-	<div class="col-sm-2 swimlane">
-		<div class="swimHeader">
-			<h3>Ready to Deploy</h3>
+		<div class="col-sm-2 swimlane">
+			<div class="swimHeader">
+				<h3>QA Ready</h3>
+			</div>
+			<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 3" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+				<h4 ng-bind="task.name"></h4>
+				
+			</div>
 		</div>
-		<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 4" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
-			<h4 ng-bind="task.name"></h4>
-			
+		<div class="col-sm-2 swimlane">
+			<div class="swimHeader">
+				<h3>Ready to Deploy</h3>
+			</div>
+			<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 4" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+				<h4 ng-bind="task.name"></h4>
+				
+			</div>
 		</div>
-	</div>
-	<div class="col-sm-2 swimlane">
-		<div class="swimHeader">
-			<h3>Deployed</h3>
-		</div>
-		<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 5" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
-			<h4 ng-bind="task.name"></h4>
-			
+		<div class="col-sm-2 swimlane">
+			<div class="swimHeader">
+				<h3>Deployed</h3>
+			</div>
+			<div class="tasks" ng-repeat="task in project.tasks" ng-if="task.status == 5" data-toggle="modal" data-target="#editTaskModal" ng-click="getTask(task._id)">
+				<h4 ng-bind="task.name"></h4>
+				
+			</div>
 		</div>
 	</div>
 </div>
@@ -80,7 +89,7 @@
 						<textarea class="form-control" type="text" name="taskDesc" placeholder="Task Description" ng-model="newTaskInfo.description"></textarea>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="submit" name="submit" value="Create Task">
+						<input class="form-control btn btn-primary" type="submit" name="submit" value="Create Task">
 					</div>
 				</form>
 			</div>

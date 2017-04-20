@@ -1,23 +1,47 @@
 body {
-	background: linear-gradient(to bottom left, #bfbfbf 40%, #666666 100%);
+	background-color: #f2f2f2;
+	/*background: linear-gradient(to bottom left, #bfbfbf 40%, #666666 100%);*/
 	height: 1175px;
 }
-
+/* all navbar css */
 .navbar {
 	margin-bottom: 0px;
 	background-color: #2f79b9;
 	color: white;
 	border-bottom: 0px solid white;
 }
-
 .navbar a {
 	color: white;
 }
-#projectContainer {
-	background-color: blue;
-	height: 100%;
-	width: 100%;
+
+.navbar-header {
+	border-right: solid 3px white;
+	border-radius: 10px;
 }
+.navbar-nav li{
+	/*border-right: solid 2px white;*/
+	border-right: solid 1px white;
+	border-radius: 10px;
+}
+
+#projectNavBar .navbar-header {
+	border-right: solid 3px #2f79b9;
+	border-radius: 10px;
+}
+#projectNavBar {
+	background-color: #f2f2f2;
+}
+#projectNavBar a {
+	color: #2f79b9;
+}
+
+#projectNavBar li {
+	border-right: solid 1px #2f79b9;
+	border-radius: 10px;
+}
+
+
+/* end of navbar css */
 
 #partialsView {
 	height: 1000px;
@@ -26,6 +50,8 @@ body {
 
 #actionsSideBar {
 	height: 100%;
+	border-right: solid 2px #2a78bb;
+	margin-top: 30px;
 	
 }
 
@@ -34,14 +60,19 @@ body {
 	word-wrap: break-word;
 }
 
+#myProjects {
+	height: 100%;
+	margin-top: 20px;
+	padding-left: 20px;
+}
 .swimlane {
 	height: 975px;
 	overflow: scroll;
 	text-align: center;
 	border-radius: 10px;
-	border-right: solid white 5px;
-	border-top: solid white 1px;
-	border-bottom: solid white 1px;
+	border-right: solid #1c507d 5px;
+	border-top: solid #1c507d 1px;
+	border-bottom: solid #1c507d 1px;
 	background: linear-gradient(to right, #a7a7a7 30%, #ffffff 144%);
 	color: white;
 }
@@ -85,7 +116,9 @@ body {
 	height: 200px;
 	margin-left: 10px;
 	margin-bottom: 10px;
-	border: 2px solid white;
+	border-right: 2px solid #2a78bb;
+	border-left: 2px solid #2a78bb;
+	border-top: 2px solid #2a78bb;
 	background: linear-gradient(to top, #ffffff -7%, #2f79b9 85%);
 	color: white;
 }
@@ -109,4 +142,7 @@ body {
 	padding-right: 10px;
 }
 
-
+/*#projectBoard {
+	background-color: #2f79b9; 
+}
+*/

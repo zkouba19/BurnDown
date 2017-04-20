@@ -37,6 +37,7 @@ module.exports = {
 	},
 	login: function(req, res){
 		var data = req.body;
+		console.log('running server login ')
 		User.findOne({email: data.email}, function(err, foundUser){
 			if(!foundUser){
 				console.log('Email has not been registered. Please create an account.')
