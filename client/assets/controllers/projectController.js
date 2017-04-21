@@ -84,7 +84,8 @@ app.controller('projectController', ['$scope', '$route', '$location', '$cookies'
 		mainFactory.createTask($scope.newTaskInfo, projectID, function(data){
 			console.log('made it back from the server')
 			$scope.newTaskInfo = {};
-			$location.url('/projects/'+$scope.project._id);
+			$scope.project = data.project;
+			console.log('this is project after new task', $scope.project)
 		})
 	}
 

@@ -85,11 +85,12 @@ app.factory('mainFactory', ['$http', function($http){
 		})
 	}
 
-	factory.createTask = function(taskInfo, projectID){
+	factory.createTask = function(taskInfo, projectID, callback){
 		console.log('ran create task function in factory')
 		$http.post('/projects/'+projectID+'/task', taskInfo).then(function(returned_data){
 			factory.project = returned_data.data.project
 			if(typeof(callback) == "function"){
+				console.log('after task in factory', returned_data.data)
 				callback(returned_data.data)
 			}
 		})

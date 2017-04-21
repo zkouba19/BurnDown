@@ -85,8 +85,13 @@ module.exports = {
 						if(err){
 							console.log('unable to add newtask to projects tasks array');
 						} else {
-							console.log('added task to project')
-							res.json({project: project})
+							Project.findOne({_id: req.params.projectID}).populate('tasks').exec(function(err, projectWithTasks){
+								if(err){
+									console.log(err);
+								} else {
+									res.json({project: projectWithTasks})
+								}
+							})
 						}
 					})
 				})
