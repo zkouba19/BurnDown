@@ -1,12 +1,31 @@
+
+
 <div id="actionsSideBar" class="col-sm-2">
+	<div class="form-group">
+		<button ng-click="" class="btn btn-primary btn-md form-control">Update Profile</button>
+	</div>
+	<div class="form-group">
+		<button ng-click="logout()" class="btn btn-primary btn-md form-control">SignOut</button>
+	</div>
+	<div class="form-group">
+		<h3>New Project:</h3>
+	</div>
 	<div class="form-group">
 		<input type="text" name="newProject" ng-model="newProjectInfo.name" class="form-control" placeholder="Project Name">
 	</div>
 	<div class="form-group">
-	<button type="button" class="btn btn-primary btn-md form-control" data-toggle="modal" data-target="#newProjectModal" ng-click="newProject()">New Project</button>
+		<button type="button" class="btn btn-primary btn-md form-control" data-toggle="modal" data-target="#newProjectModal" ng-click="newProject()">New Project</button>
 	</div>
 	<div class="form-group">
-	<button ng-click="logout()" class="btn btn-primary btn-md form-control">SignOut</button>
+		<h3>Find Friends:</h3>
+	</div>
+	<div class="form-group friendSearchInput">
+		<input type="text" name="friendSearch" class="form-control" placeholder="Search by Email..." ng-model="friendSearch.email">
+	</div>
+	<div class="form-group">
+		<ul class="list-group">
+			<li class="list-group-item" ng-if="friendSearch.email" ng-repeat="friend in users | filter: friendSearch.email | orderBy: email"><a href=""><span ng-bind="friend.email"></span></a><button class="btn btn-success badge">Add</button></li>
+		</ul>
 	</div>
 </div>
 

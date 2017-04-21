@@ -49,7 +49,7 @@ module.exports = {
 					req.session.userID = foundUser._id
 					res.json({user: foundUser})
 				} else {
-					console.login('unable to sign in')
+					console.log('unable to sign in')
 					res.json({messages: ['Incorrect Password']})
 				}
 			}
