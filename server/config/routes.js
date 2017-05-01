@@ -91,7 +91,10 @@ module.exports = function(app){
 	 	console.log('made it to create task route')
 	 	ProjectController.editTask(req, res);
 	 })
-
+	 app.post('/:userID/friend/:friendID', loginRequired, ensureCorrectUser, function(req, res){
+	 	console.log('made it to create frendship route');
+	 	UserController.addFriend(req, res);
+	 })
 
 
 

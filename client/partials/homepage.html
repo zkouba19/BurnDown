@@ -24,7 +24,7 @@
 	</div>
 	<div class="form-group">
 		<ul class="list-group">
-			<li class="list-group-item" ng-if="friendSearch.email" ng-repeat="friend in users | filter: friendSearch.email | orderBy: email"><a href=""><span ng-bind="friend.email"></span></a><button class="btn btn-success badge">Add</button></li>
+			<li class="list-group-item" ng-if="friendSearch.email && friend._id != user._id" ng-repeat="friend in users | filter: friendSearch.email | orderBy: email"><a href=""><span ng-bind="friend.email"></span></a><button class="btn btn-success badge" ng-click="addFriend(friend._id)">Add</button></li>
 		</ul>
 	</div>
 </div>

@@ -109,6 +109,17 @@ app.factory('mainFactory', ['$http', function($http){
 			}
 		})
 	};
+	factory.addFriend = function(userID, friendID, callback){
+		console.log('made it to add fiend in factory');
+		$http.post('/'+userID+'/friend/'+friendID).then(function(returned_data){
+			console.log('returned data from friends'+returned_data.data);
+			factory.user = returned_data.data.user
+			if(typeof(callback) == "function"){
+				callback(returned_data.data)
+			}
+		})
+	}
+
 	return factory
 }])
 

@@ -66,5 +66,30 @@ module.exports = {
 				}
 			}
 		})
+	},
+	addFriend: function(req, res){
+		console.log('running add friend function');
+		// first find current user
+		User.findOne({_id: req.session.userID}, function(err, user){
+			if(err){
+				console.log('error when finding user', err);
+			} else {
+				User.findOne({_id: req.params.friendID}, function(err, friend){
+					if(err){
+						console.log('error finding friend', err);
+					} else {
+						user.friends.push(friend._id);
+						user.save(function(err){
+							if(err){
+								console.log('error when saving friend', err);
+							} else {
+								console.log('successfully added friend')
+								res.json({user: user});
+							}
+						})
+					}
+				})
+			}
+		})
 	}
 }

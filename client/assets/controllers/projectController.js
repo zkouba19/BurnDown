@@ -99,4 +99,11 @@ app.controller('projectController', ['$scope', '$route', '$location', '$cookies'
 		})
 	}
 
+	$scope.addFriend  = function(friendID){
+		console.log("got friend id: "+ friendID)
+		mainFactory.addFriend($scope.user._id, friendID, function(data){
+			console.log('got data back: '+data);
+			$scope.user = data.user
+		})
+	}
 }])
