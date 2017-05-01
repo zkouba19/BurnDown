@@ -46,11 +46,15 @@ app.factory('mainFactory', ['$http', function($http){
 			console.log('this is the user from persistence', returned_data.data.user)
 			factory.user = returned_data.data.user
 		});
+		$http.get('/users').then(function(returned_data){
+			console.log('here are all users', returned_data.data.users);
+			factory.users = returned_data.data.users
+		})
 		$http.get('/projects').then(function(returned_data){
 			console.log('this is the projects from persistence', returned_data.data.projects)
 			factory.projects = returned_data.data.projects
 			if(typeof(callback) == 'function'){
-				callback({user: factory.user, projects: factory.projects})
+				callback({user: factory.user, users: factory.users, projects: factory.projects})
 			}
 		})
 	};

@@ -13,6 +13,18 @@ module.exports = {
 			}
 		})
 	},
+	
+	allUsers: function(req, res){
+		User.find({}, function(err, users){
+			if(err){
+				console.log(err);
+			} else {
+				console.log("found all users");
+				res.json({users: users})
+			}
+		})
+	},
+
 	register: function(req, res){
 		console.log('running the register function with post data', req.body)
 		var data = req.body;

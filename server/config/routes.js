@@ -58,6 +58,11 @@ module.exports = function(app){
 		UserController.index(req, res);
 	})
 
+	app.get('/users', loginRequired, function(req, res){
+		console.log('made it to get all users route')
+		UserController.allUsers(req, res);
+	})
+
 	app.get('/projects', loginRequired, function(req, res){
 		console.log('made it to server /projects get route');
 		ProjectController.index(req, res);

@@ -1,27 +1,19 @@
 app.controller('projectController', ['$scope', '$route', '$location', '$cookies', 'mainFactory', function($scope, $route, $location, $cookies, mainFactory){
 	$scope.projects = mainFactory.projects;
 	$scope.project = mainFactory.project;
-	$scope.users = [{name:'John', age: 25.9, email:'zack@boy.com'},
-            {name:'Jessie', age: 30.8, email:'nick@girl.com'},
-            {name:'Johanna', age: 28.1, email:'megan@girl.com'},
-            {name:'Joy', age: 15.5, email:'dad@girl.com'},
-            {name:'Mary', age: 28.5, email:'mom@girl.com'},
-            {name:'Peter', age: 95.1, email:'lina@boy.com'},
-            {name:'Sebastian', age: 50.5, email:'shireen@boy.com'},
-            {name:'Erika', age: 27.2, email:'sophia@girl.com'},
-            {name:'Patrick', age: 40.3, email:'layla@boy.com'}];
+	$scope.users = [];
 	$scope.user = mainFactory.user;
 	$scope.editTaskInfo = {};
 	$scope.isLoggedOn = $cookies.get('userLoggedIn');
-
 	function getData(){
 		console.log('running get data', $cookies.get('userLoggedIn'));
 		if($cookies.get('userLoggedIn')){
 			console.log('ran the first if statement' )
 			mainFactory.getLoggedInUserAndProjects(function(data){
 				$scope.user = data.user
+				$scope.users = data.users
 				$scope.projects = data.projects
-				console.log('**********current user and project********')
+				console.log('**********current user, users, and project********')
 				console.log(data)
 				console.log('******************')
 				console.log($scope.user)
